@@ -2,7 +2,7 @@ const addBtn = document.querySelector('#new-toy-btn')
 const toyForm = document.querySelector('.container')
 let addToy = false
 
-// YOUR CODE HERE
+const toyCollectionDiv = document.querySelector('#toy-collection');
 
 addBtn.addEventListener('click', () => {
   // hide & seek with the form
@@ -15,5 +15,9 @@ addBtn.addEventListener('click', () => {
   }
 })
 
-
-// OR HERE!
+function getToyList() {
+  let newToyCard = document.createElement('div');
+  newToyCard.className = 'card';
+  fetch('http://localhost:3000/toys').then(results => results.json()).then(data => console.log(data)
+  );
+};
