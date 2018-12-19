@@ -34,3 +34,12 @@ function showToyList(toy) {
 };
 
 getToyList();
+
+function addNewToy() {
+  const createNewToyButton = document.querySelector('.submit');
+  createNewToyButton.addEventListener('click', buttmunch)
+}
+function buttmunch(event) {
+  event.preventDefault();
+  console.log(event)
+}
