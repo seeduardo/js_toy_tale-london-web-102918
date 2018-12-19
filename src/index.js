@@ -16,8 +16,21 @@ addBtn.addEventListener('click', () => {
 })
 
 function getToyList() {
-  let newToyCard = document.createElement('div');
-  newToyCard.className = 'card';
-  fetch('http://localhost:3000/toys').then(results => results.json()).then(data => console.log(data)
+  fetch('http://localhost:3000/toys').then(results => results.json()).then(data => data.forEach(showToyList)
   );
 };
+
+function showToyList(toy) {
+  let newToyCard = document.createElement('div');
+  newToyCard.innerHTML = `
+    <div data-id="${toy.id}" class="card">
+      <h2>${toy.name}</h2>
+      <img src="${toy.image}" class="toy-avatar">
+      <p>${toy.likes} Likes </p>
+      <button class="like-btn">Like <3</button>
+    </div>
+  `;
+ toyCollectionDiv.appendChild(newToyCard)
+};
+
+getToyList();
