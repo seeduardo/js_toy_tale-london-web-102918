@@ -47,6 +47,18 @@
       "name": "Little Green Men",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Alien-PNG-File.png",
       "likes": -2
+    },
+    {
+      "id": 9,
+      "name": "Blah",
+      "image": "https://farm1.staticflickr.com/13/14158145_bc6aa70bff_z.jpg",
+      "likes": 0
+    },
+    {
+      "id": 10,
+      "name": "Clarfin",
+      "image": "https://drawingwoo.com/wp-content/uploads/2016/08/funny-faces-cartoons-stupid-face-stock-photos-images-royalty-free-stupid-face-images.jpg",
+      "likes": 0
     }
   ]
 }

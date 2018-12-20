@@ -1,22 +1,27 @@
+getToyList();
+
+let likedToy;
+
 const addBtn = document.querySelector('#new-toy-btn')
 const toyForm = document.querySelector('.container')
 let addToy = false
-
 const toyCollectionDiv = document.querySelector('#toy-collection');
 
 addBtn.addEventListener('click', () => {
   // hide & seek with the form
   addToy = !addToy
   if (addToy) {
-    toyForm.style.display = 'block'
-    // submit listener here
+    toyForm.style.display = 'block';
+    newToyFormListener()
   } else {
-    toyForm.style.display = 'none'
+    toyForm.style.display = 'none';
   }
 })
 
 function getToyList() {
-  fetch('http://localhost:3000/toys').then(results => results.json()).then(data => data.forEach(showToyList)
+  fetch('http://localhost:3000/toys')
+    .then(results => results.json())
+    .then(data => data.forEach(showToyList)
   );
 };
 
@@ -33,13 +38,49 @@ function showToyList(toy) {
  toyCollectionDiv.appendChild(newToyCard)
 };
 
-getToyList();
+function newToyFormListener() {
+  const createNewToyForm = document.querySelector('.add-toy-form');
+  createNewToyForm.addEventListener('submit', submitNewToy)
+};
 
-function addNewToy() {
-  const createNewToyButton = document.querySelector('.submit');
-  createNewToyButton.addEventListener('click', buttmunch)
-}
-function buttmunch(event) {
+function submitNewToy(event) {
   event.preventDefault();
-  console.log(event)
+
+  const [nameInput, imageInput] = event.target.querySelectorAll('.input-text');
+
+  const data = {
+    id: "",
+    name: nameInput.value,
+    image: imageInput.value,
+    likes: 0
+  };
+
+  fetch('http://localhost:3000/toys', {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(showToyList);
+};
+
+function allLikesListener() {
+  const likeButtons = document.querySelectorAll('.like-btn');
+  for (const likeButton of likeButtons) {
+    likeButton.addEventListener('click', event => {
+      likedToy = document.querySelector(`div[data-id="${event.target.parentElement.dataset.id}"]`);
+      increaseLikes(likedToy);
+    });
+  };
+};
+//
+// function individualLikesListener(event) {
+//   document.querySelector(`div[data-id="${event.target.parentElement.dataset.id}"]`)
+// }
+
+function increaseLikes(likedToy) {
+  console.log(likedToy)
 }
